@@ -1,9 +1,8 @@
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import UNLIcon from '../images/unl.png';
+import UNLIcon from '../images/unlbanner.png';
 import pathnames from '../utils/pathnames';
 
 const useStyles = makeStyles((theme) => ({
@@ -14,8 +13,9 @@ const useStyles = makeStyles((theme) => ({
         margin: '0.8em 0 0.8em 0'
     },
     menuIcon: {
-        marginRight: theme.spacing(2),
-        width: '3em'
+        marginRight: theme.spacing(3),
+        height: '5em',
+        filter: 'brightness(0.9)'
     },
     title: {
         flexGrow: 1,
@@ -31,9 +31,6 @@ function AppTopBar() {
             <Toolbar>
                 <Link to={pathnames.home} className={classes.link}>
                     <img src={UNLIcon} className={classes.menuIcon} alt="" />
-                    <Typography variant="h4" className={classes.title}>
-                        UNL - Encuesta estudiantil
-                        </Typography>
                 </Link>
             </Toolbar>
         </AppBar>

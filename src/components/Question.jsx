@@ -4,11 +4,22 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+    rootContainer: {
         display: 'flex',
         width: '100%',
         flexDirection: 'column',
         alignItems: 'center',
+    },
+    root: {
+        display: 'flex',
+        width: (window.innerWidth < 800) ? '100%' : '80%',
+        flexDirection: 'column',
+        alignItems: 'center',
+        borderStyle:  (window.innerWidth < 800) ? 'none' : 'solid',
+        boxSizing: 'border-box',
+        padding: '1em',
+        borderColor: '#e6e2ff',
+        marginBottom: '1em'
     },
     title: {
         color: '#1f1f1f',
@@ -77,39 +88,41 @@ function Question({ question, options, saveAnswer, setErrorMessage }) {
     }
 
     return (
-        <div className={classes.root}>
-            <Typography variant={window.innerWidth < 800 ? "h5" : "h4"} className={classes.title}>
-                {question}
-            </Typography>
-            <div className={classes.optionsContainer}>
-                <Button
-                    size="large"
-                    color="primary"
-                    variant={optionChosen === 0 ? "contained" : "outlined"}
-                    onClick={() => setOptionChosen(0)}
-                    className={classes.optionButton}
-                >
-                    {options[0]}
+        <div  className={classes.rootContainer}>
+            <div className={classes.root}>
+                <Typography variant={window.innerWidth < 800 ? "h5" : "h4"} className={classes.title}>
+                    {question}
+                </Typography>
+                <div className={classes.optionsContainer}>
+                    <Button
+                        size="large"
+                        color="primary"
+                        variant={optionChosen === 0 ? "contained" : "outlined"}
+                        onClick={() => setOptionChosen(0)}
+                        className={classes.optionButton}
+                    >
+                        {"A - " + options[0]}
+                    </Button>
+                    <Button
+                        size="large"
+                        color="primary"
+                        variant={optionChosen === 1 ? "contained" : "outlined"}
+                        onClick={() => setOptionChosen(1)}
+                        className={classes.optionButton}
+                    >
+                        {"B - " + options[1]}
+                    </Button>
+                </div>
+                <div className={classes.buttonContainer}>
+                    <Button
+                        size="large"
+                        color="secondary"
+                        variant="contained"
+                        onClick={handleSubmit}
+                    >
+                        Siguiente
                 </Button>
-                <Button
-                    size="large"
-                    color="primary"
-                    variant={optionChosen === 1 ? "contained" : "outlined"}
-                    onClick={() => setOptionChosen(1)}
-                    className={classes.optionButton}
-                >
-                    {options[1]}
-                </Button>
-            </div>
-            <div className={classes.buttonContainer}>
-                <Button
-                    size="large"
-                    color="secondary"
-                    variant="contained"
-                    onClick={handleSubmit}
-                >
-                    Siguiente
-                </Button>
+                </div>
             </div>
         </div>
     )
