@@ -41,6 +41,7 @@ function Footer() {
         } else {
             setPosition('absolute')
         }
+        if(window.innerHeight < 650 ) setPosition('relative')
     }, [])
 
     const classes = useStyles({position: position});
@@ -51,7 +52,7 @@ function Footer() {
                     Universidad Nacional de Loja  |  Carrera de Psicología Educativa y Orientación
                 </p>
                 <p className={ classes.footerText}>
-                    Web diseñada por Gazapos Labs
+                    Diseñado por <a href="https://github.com/sendrarisk" style={{textDecoration: 'none', color: 'inherit'}}>Cristian Villafañe</a>
                 </p>
             </Toolbar>
         </AppBar>
