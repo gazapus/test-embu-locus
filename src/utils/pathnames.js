@@ -1,5 +1,6 @@
 module.exports = {
     home: '/',
     form: '/form',
-    instrucctions: '/instrucctions'
+    instrucctions: '/instrucctions',
+    userform: '/input',
 }

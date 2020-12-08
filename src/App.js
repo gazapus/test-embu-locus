@@ -1,10 +1,13 @@
 import { BrowserRouter } from "react-router-dom";
 import Routes from './Routes';
+import ThemeContext from './components/Context';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes/>
+      <ThemeContext>
+        <Routes />
+      </ThemeContext>
     </BrowserRouter>
   );
 }
