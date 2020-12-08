@@ -41,6 +41,7 @@ function Form() {
                 state: { answers: answers }
             })
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [answers])
 
     function saveAnswer(optionChosen) {

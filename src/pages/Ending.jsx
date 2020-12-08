@@ -73,6 +73,7 @@ function Ending({location}) {
             })
             .catch(err => setSaved(false))
             .finally(() => setSaving(false))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
