@@ -5,9 +5,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '../components/AppBar';
 import Footer from '../components/Footer';
 import pathnames from '../utils/pathnames';
-import {useHistory} from 'react-router-dom';
-import {useContext} from 'react';
-import {ThemeContext} from '../components/Context';
+import { useHistory } from 'react-router-dom';
+import { useContext } from 'react';
+import { ThemeContext } from '../components/Context';
+import AnswerService from '../services/answer.service';
 
 const useStyle = makeStyles((theme) => ({
     rootContainer: {
@@ -75,7 +76,7 @@ function UserForm() {
     const [sended, setSended] = useState(false);
     const classes = useStyle();
     let history = useHistory();
-    const { setUserData} = useContext(ThemeContext);
+    const { setUserData } = useContext(ThemeContext);
 
     function saveData() {
         setSended(true)
@@ -84,14 +85,24 @@ function UserForm() {
             paraleloRef.current.value.length > 0 &&
             sexoRef.current.value.length > 0
         ) {
-            localStorage.setItem('alias', aliasRef.current.value);
-            setUserData({
-                'alias': aliasRef.current.value,
-                'age': ageRef.current.value,
-                'paralelo': paraleloRef.current.value,
-                'sex': sexoRef.current.value,
-            });
-            history.push(pathnames.instrucctions);
+            AnswerService.check(aliasRef.current.value)
+                .then(res => {
+                    if (res.status === 201) {
+                        alert("El alias ya está en uso, escriba otro por favor");
+                    } else {
+                        localStorage.setItem('alias', aliasRef.current.value);
+                        setUserData({
+                            'alias': aliasRef.current.value,
+                            'age': ageRef.current.value,
+                            'paralelo': paraleloRef.current.value,
+                            'sex': sexoRef.current.value,
+                        });
+                        history.push(pathnames.instrucctions);
+                    }
+                })
+                .catch(err => {
+                    alert("Error interno, intenté mas tarde");
+                })
         }
     }
 

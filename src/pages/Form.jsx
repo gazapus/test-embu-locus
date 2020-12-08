@@ -6,6 +6,8 @@ import AppBar from '../components/AppBar';
 import Footer from '../components/Footer';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
+import pathnames from '../utils/pathnames';
 
 const useStyles = makeStyles((theme) => ({
     progressContainer: {
@@ -22,6 +24,7 @@ function Form() {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [errorMessage, setErrorMessage] = useState('');
     const classes = useStyles();
+    let history = useHistory();
 
     useEffect(() => {
         let answers = Array(23).fill(-1);
@@ -30,6 +33,15 @@ function Form() {
             .then(res => setQuestions(res.data))
             .catch(err => setErrorMessage('Error: Reintenté de vuelta'))
     }, []);
+
+    useEffect(() => {
+        if (answers[22] === 1 || answers[22] === 0) {
+            history.push({
+                pathname: pathnames.end,
+                state: { answers: answers }
+            })
+        }
+    }, [answers])
 
     function saveAnswer(optionChosen) {
         let newAnswers = [...answers];
@@ -41,8 +53,6 @@ function Form() {
     function nextQuestion() {
         if (currentQuestion < questions.length - 1) {
             setCurrentQuestion(currentQuestion + 1)
-        } else {
-            alert("fin");
         }
     }
 
@@ -63,7 +73,7 @@ function Form() {
                         setErrorMessage={setErrorMessage}
                     />
             }
-            <Footer/>
+            <Footer />
         </div>
     )
 }

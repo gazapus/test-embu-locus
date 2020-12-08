@@ -9,6 +9,10 @@ function get(id) {
     return http.get(`/answer/get/${id}`, { headers: authHeader() });
 };
 
+function check(alias) {
+    return http.get(`/answer/check/${alias}`);
+};
+
 function create(data) {
     return http.post("/answer/create", data);
 };
@@ -26,7 +30,8 @@ let methods = {
     get,
     create,
     remove,
-    removeAll
+    removeAll,
+    check
 };
 
 export default methods;

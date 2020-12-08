@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Instruccionts  from './pages/Instruccionts';
 import Form  from './pages/Form';
 import UserForm  from './pages/UserForm';
+import Ending  from './pages/Ending';
 import NotFound from './pages/NotFound';
 import pathNames from './utils/pathnames';
 
@@ -14,6 +15,7 @@ function Routes() {
             <Route exact path={pathNames.form} component={Form} />
             <Route exact path={pathNames.userform} component={UserForm} />
             <Route exact path={pathNames.instrucctions} component={Instruccionts} />
+            <Route exact path={pathNames.end} component={Ending} />
             <Route component={NotFound} />
         </Switch>
     );

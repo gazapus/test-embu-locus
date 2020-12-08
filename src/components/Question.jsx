@@ -101,7 +101,7 @@ function Question({ question, options, saveAnswer, setErrorMessage }) {
                         onClick={() => setOptionChosen(0)}
                         className={classes.optionButton}
                     >
-                        {"A - " + options[0]}
+                        {options[0]}
                     </Button>
                     <Button
                         size="large"
@@ -110,7 +110,7 @@ function Question({ question, options, saveAnswer, setErrorMessage }) {
                         onClick={() => setOptionChosen(1)}
                         className={classes.optionButton}
                     >
-                        {"B - " + options[1]}
+                        {options[1]}
                     </Button>
                 </div>
                 <div className={classes.buttonContainer}>
