@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '../components/AppBar';
 import Footer from '../components/Footer';
-import Footer2 from '../components/Footer2';
 import pathnames from '../utils/pathnames';
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
@@ -96,81 +95,77 @@ function UserForm() {
         }
     }
 
-return (
-    <div>
-        <AppBar />
-        <div className={classes.rootContainer}>
-            <form className={classes.root}>
-                <h3 className={classes.title}>DATOS INFORMATIVOS</h3>
-                <TextField
-                    required
-                    id="alias"
-                    label="Alias"
-                    variant="outlined"
-                    inputRef={aliasRef}
-                    className={classes.input}
-                    helperText={sended && aliasRef.current.value === "" ? 'Debe completar este campo' : ''}
-                    error={sended && aliasRef.current.value === ""}
-                    name="alias"
-                    InputProps={{ inputProps: { maxLength: 30 } }}
-                />
-                <TextField
-                    required
-                    id="age"
-                    label="Edad"
-                    variant="outlined"
-                    InputProps={{ inputProps: { min: 3, max: 99 } }}
-                    type="number"
-                    inputRef={ageRef}
-                    className={classes.input}
-                    helperText={
-                        (sended && (ageRef.current.value < 3 || ageRef.current.value > 99)) ? 'Debe ingresar una edad válida' : ''}
-                    error={(sended && (ageRef.current.value < 3 || ageRef.current.value > 99))}
-                    name="age"
-                />
-                <TextField
-                    required
-                    id="anio"
-                    label="Año de básica"
-                    variant="outlined"
-                    type="text"
-                    inputRef={paraleloRef}
-                    className={classes.input}
-                    helperText={sended && paraleloRef.current.value === "" ? 'Debe completar este campo' : ''}
-                    error={sended && paraleloRef.current.value === ""}
-                    InputProps={{ inputProps: { maxLength: 30 } }}
-                />
-                <TextField
-                    required
-                    id="Sexo"
-                    label="Sexo"
-                    variant="outlined"
-                    type="text"
-                    inputRef={sexoRef}
-                    className={classes.input}
-                    helperText={sended && sexoRef.current.value === "" ? 'Debe completar este campo' : ''}
-                    error={sended && sexoRef.current.value === ""}
-                    name="sexo"
-                    InputProps={{ inputProps: { maxLength: 30 } }}
-                />
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    size="large"
-                    className={classes.button}
-                    onClick={saveData}
-                >
-                    ACEPTAR
+    return (
+        <div>
+            <AppBar />
+            <div className={classes.rootContainer}>
+                <form className={classes.root}>
+                    <h3 className={classes.title}>DATOS INFORMATIVOS</h3>
+                    <TextField
+                        required
+                        id="alias"
+                        label="Alias"
+                        variant="outlined"
+                        inputRef={aliasRef}
+                        className={classes.input}
+                        helperText={sended && aliasRef.current.value === "" ? 'Debe completar este campo' : ''}
+                        error={sended && aliasRef.current.value === ""}
+                        name="alias"
+                        InputProps={{ inputProps: { maxLength: 30 } }}
+                    />
+                    <TextField
+                        required
+                        id="age"
+                        label="Edad"
+                        variant="outlined"
+                        InputProps={{ inputProps: { min: 3, max: 99 } }}
+                        type="number"
+                        inputRef={ageRef}
+                        className={classes.input}
+                        helperText={
+                            (sended && (ageRef.current.value < 3 || ageRef.current.value > 99)) ? 'Debe ingresar una edad válida' : ''}
+                        error={(sended && (ageRef.current.value < 3 || ageRef.current.value > 99))}
+                        name="age"
+                    />
+                    <TextField
+                        required
+                        id="anio"
+                        label="Año de básica"
+                        variant="outlined"
+                        type="text"
+                        inputRef={paraleloRef}
+                        className={classes.input}
+                        helperText={sended && paraleloRef.current.value === "" ? 'Debe completar este campo' : ''}
+                        error={sended && paraleloRef.current.value === ""}
+                        InputProps={{ inputProps: { maxLength: 30 } }}
+                    />
+                    <TextField
+                        required
+                        id="Sexo"
+                        label="Sexo"
+                        variant="outlined"
+                        type="text"
+                        inputRef={sexoRef}
+                        className={classes.input}
+                        helperText={sended && sexoRef.current.value === "" ? 'Debe completar este campo' : ''}
+                        error={sended && sexoRef.current.value === ""}
+                        name="sexo"
+                        InputProps={{ inputProps: { maxLength: 30 } }}
+                    />
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        size="large"
+                        className={classes.button}
+                        onClick={saveData}
+                    >
+                        ACEPTAR
                     </Button>
-            </form>
+                </form>
+            </div>
+            <Footer />
         </div>
-        {
-            window.innerWidth < 600 && window.innerHeight < 1000 ? 
-            <Footer2/>
-            :
-            <Footer/>
-        }
-    </div>
-)}
+    )
+}
 
 export default UserForm;

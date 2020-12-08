@@ -4,6 +4,7 @@ import Question from '../components/Question.jsx';
 import Alert from '../components/Alert';
 import AppBar from '../components/AppBar';
 import Footer from '../components/Footer';
+import Footer2 from '../components/Footer2';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
@@ -74,7 +75,12 @@ function Form() {
                         setErrorMessage={setErrorMessage}
                     />
             }
-            <Footer />
+            {
+                window.innerWidth < 700 || window.innerHeight < 700 ?
+                    <Footer2 />
+                    :
+                    <Footer />
+            }
         </div>
     )
 }
