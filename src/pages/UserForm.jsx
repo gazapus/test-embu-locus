@@ -8,7 +8,6 @@ import pathnames from '../utils/pathnames';
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import { ThemeContext } from '../components/Context';
-import AnswerService from '../services/answer.service';
 
 const useStyle = makeStyles((theme) => ({
     rootContainer: {
