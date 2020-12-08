@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '../components/AppBar';
 import Footer from '../components/Footer';
+import Footer2 from '../components/Footer2';
 import pathnames from '../utils/pathnames';
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
@@ -163,7 +164,12 @@ return (
                     </Button>
             </form>
         </div>
-        <Footer />
+        {
+            window.innerWidth < 600 && window.innerHeight < 1000 ? 
+            <Footer2/>
+            :
+            <Footer/>
+        }
     </div>
 )}
 
