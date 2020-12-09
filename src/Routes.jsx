@@ -5,6 +5,8 @@ import Instruccionts  from './pages/Instruccionts';
 import Form  from './pages/Form';
 import UserForm  from './pages/UserForm';
 import Ending  from './pages/Ending';
+import Login  from './pages/Login';
+import Dashboard  from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import pathNames from './utils/pathnames';
 
@@ -16,6 +18,8 @@ function Routes() {
             <Route exact path={pathNames.userform} component={UserForm} />
             <Route exact path={pathNames.instrucctions} component={Instruccionts} />
             <Route exact path={pathNames.end} component={Ending} />
+            <Route exact path={pathNames.login} component={Login} />
+            <Route exact path={pathNames.dashboard} component={Dashboard} />
             <Route component={NotFound} />
         </Switch>
     );

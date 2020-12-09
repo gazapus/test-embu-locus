@@ -21,9 +21,12 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         color: '#141414',
     },
+    right: {
+
+    }
 }));
 
-function AppTopBar() {
+function AppTopBar({rightComponent = <></>}) {
     const classes = useStyles();
 
     return (
@@ -32,6 +35,10 @@ function AppTopBar() {
                 <Link to={pathnames.home} className={classes.link}>
                     <img src={UNLIcon} className={classes.menuIcon} alt="" />
                 </Link>
+                <span className={classes.title}></span>
+                <div className={classes.right}>
+                    {rightComponent}
+                </div>
             </Toolbar>
         </AppBar>
     )

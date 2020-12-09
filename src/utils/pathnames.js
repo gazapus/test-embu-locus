@@ -3,5 +3,7 @@ module.exports = {
     form: '/form',
     instrucctions: '/instrucctions',
     userform: '/input',
-    end: '/end'
+    end: '/end',
+    login: '/login',
+    dashboard: '/dashboard'
 }

@@ -1,4 +1,5 @@
 import http from "../utils/http-common";
+import authHeader from './auth-header';
 
 function login(username, password) {
     return http
@@ -19,10 +20,15 @@ const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("user"));
 };
 
+function isLogged() {
+    return http.get("/auth/check", { headers: authHeader() });
+};
+
 let methods = {
     login,
     logout,
     getCurrentUser,
+    isLogged
 }
 
 export default methods;

@@ -41,7 +41,7 @@ function Footer() {
         } else {
             setPosition('absolute')
         }
-        if(window.innerHeight < 650 ) setPosition('relative')
+        //if(window.innerHeight < 650 ) setPosition('relative')
     }, [])
 
     const classes = useStyles({position: position});
