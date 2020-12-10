@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function BasicTable({answers, onDelete}) {
+export default function BasicTable({answers, onDelete, onDetails}) {
     const classes = useStyles();
 
     return (
@@ -49,14 +49,13 @@ export default function BasicTable({answers, onDelete}) {
                             <TableCell align="right">{row.sex}</TableCell>
                             <TableCell align="right">{row.age}</TableCell>
                             <TableCell align="right">
-                                <IconButton className={classes.button} color="primary">
+                                <IconButton className={classes.button} color="primary" onClick={() => onDetails(row)}>
                                     <LaunchIcon />
                                 </IconButton>
                                 <IconButton className={classes.button} color="secondary" onClick={() => onDelete(row.id)}>
                                     <DeleteForeverIcon />
                                 </IconButton>
                             </TableCell>
-
                         </TableRow>
                     ))}
                 </TableBody>

@@ -13,6 +13,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Table from '../components/Table';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import Modal from '../components/Modal';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        marginBottom: '2em',
         [theme.breakpoints.between('xs', 'md')]: {
             width: '98%',
         },
@@ -55,6 +57,7 @@ function Dashboard() {
     const [isLogged, setIsLoggeed] = useState(false);
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
+    const [modalAnswer, setModalAnswer] = useState(null);
     const history = useHistory();
     const classes = useStyles();
 
@@ -163,10 +166,21 @@ function Dashboard() {
                         <span className={classes.detail}>Locus Externo: {answers.filter(e => e.locus === "Externo").length}</span>
                         <span className={classes.detail}>Locus Interno: {answers.filter(e => e.locus === "Interno").length}</span>
                     </div>
-                    <Table answers={answers} onDelete={deleteAnswer} />
+                    <Table
+                        answers={answers}
+                        onDelete={deleteAnswer}
+                        onDetails={(answer) => setModalAnswer(answer)} />
                 </div>
             </div>
             <Footer />
+            {modalAnswer ?
+                <Modal
+                    open={modalAnswer !== null}
+                    answer={modalAnswer}
+                    questions={questions}
+                    handleClose={() => setModalAnswer(null)}
+                /> : ''
+            }
         </div>
     )
 }

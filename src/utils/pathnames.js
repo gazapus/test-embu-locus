@@ -5,5 +5,5 @@ module.exports = {
     userform: '/input',
     end: '/end',
     login: '/login',
-    dashboard: '/dashboard'
+    dashboard: '/dashboard',
 }
