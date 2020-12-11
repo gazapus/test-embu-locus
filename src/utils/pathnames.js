@@ -6,4 +6,8 @@ module.exports = {
     end: '/end',
     login: '/login',
     dashboard: '/dashboard',
+    formembu: '/formembu',
+    userformembu: '/userformembu',
+    end2: '/end2',
+
 }
