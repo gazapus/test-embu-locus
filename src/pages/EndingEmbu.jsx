@@ -8,8 +8,7 @@ import pathnames from '../utils/pathnames';
 import { useEffect, useState } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import AnswerService from '../services/answerEmbu.service';
-import {useContext} from 'react';
-import {ThemeContext} from '../components/Context';
+import { DIMENSIONS } from '../data/questions';
 
 const useStyle = makeStyles({
     root: {
@@ -47,30 +46,71 @@ const useStyle = makeStyles({
     }
 })
 
+function calculateScore(dimension, answers) {
+    let reverse = [5, 4, 3, 2, 1];
+    let puntaje = 0;
+    for (let i = 0; i < answers.length; i++) {
+        if (answers[i].dimension === dimension) {
+            if (answers[i].reverse) {
+                puntaje += reverse[answers[i].selected - 1];
+            } else {
+                puntaje += answers[i].selected;
+            }
+        }
+    }
+    return puntaje;
+}
+function calculateScale(dimension, answers) {
+    let min = answers.filter(e => e.dimension === dimension).length;
+    let max = min * 5;
+    let difference = (max - min) / 3;
+    let middleTop =  Math.floor(max - difference);
+    let middleBottom =  Math.floor(middleTop - 1 - difference);
+    let score = calculateScore(dimension, answers);
+    let scale;
+    if (score >= middleTop) {
+        scale = "Alto";
+    } else if (score < middleTop && score >= middleBottom) {
+        scale = "Medio";
+    } else {
+        scale = "Bajo"
+    }
+    return scale;
+}
 
-function Ending({location}) {
+function Ending({ location }) {
     const [saving, setSaving] = useState(true);
     const [saved, setSaved] = useState(false);
-    const { userData} = useContext(ThemeContext);
 
     const classes = useStyle();
 
     useEffect(() => {
-        let dataToSave = {
-            answers: location.state.answers,
-            alias: userData.alias
-        }
-        console.log(dataToSave)
-        AnswerService.create(dataToSave)
-            .then(res => {
-                if(res.status === 200) {
-                    setSaved(true);
-                } else {
-                    setSaved(false);
+        if (localStorage.getItem("alias") && location.state) {
+            let results = DIMENSIONS.map(e => {
+                return {
+                    dimension: e,
+                    score: calculateScore(e, location.state.answers),
+                    scale: calculateScale(e, location.state.answers)
                 }
-            })
-            .catch(err => setSaved(false))
-            .finally(() => setSaving(false))
+            });
+            let dataToSave = {
+                answers: location.state.answers,
+                alias: localStorage.getItem("alias"),
+                results: results
+            }
+            AnswerService.create(dataToSave)
+                .then(res => {
+                    if (res.status === 200) {
+                        setSaved(true);
+                    } else {
+                        setSaved(false);
+                    }
+                })
+                .catch(err => setSaved(false))
+                .finally(() => setSaving(false))
+        } else {
+            setSaving(false);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -96,7 +136,7 @@ function Ending({location}) {
                                 <Typography variant={window.innerWidth > 400 ? 'h3' : 'h4'} className={classes.titleError}>
                                     Error al registrar su respuesta. Intente nuevamente
                                 </Typography>
-                                <Link to={pathnames.home} style={{textDecoration: 'none'}}>
+                                <Link to={pathnames.home} style={{ textDecoration: 'none' }}>
                                     <Button
                                         color="primary"
                                         variant="contained"

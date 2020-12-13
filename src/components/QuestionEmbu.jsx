@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     title: {
         color: '#1f1f1f',
         margin: '3vmax',
-        textAlign: 'center'
+        textAlign: 'center',
+        minHeight: '3em'
     },
     radios: {
         display: 'flex',
@@ -111,36 +112,15 @@ function Question({ question, saveAnswer, setErrorMessage, number }) {
                 <div className={classes.radios}>
                     <div className={classes.radio}>
                         <Radio
-                            checked={selectedValue === 5}
+                            checked={selectedValue === 1}
                             onChange={handleChange}
-                            value={5}
+                            value={1}
                             name="radio-button-demo"
-                            inputProps={{ 'aria-label': 5 }}
-                            id="siempre"
+                            inputProps={{ 'aria-label': 1 }}
+                            onKeyDown={e => {if(e.key === "Enter") handleSubmit()}}
+                            id="Nunca"
                         />
-                        <label htmlFor="siempre" className={classes.label}>Siempre</label>
-                    </div>
-                    <div className={classes.radio}>
-                        <Radio
-                            checked={selectedValue === 4}
-                            onChange={handleChange}
-                            value={4}
-                            name="radio-button-demo"
-                            inputProps={{ 'aria-label': 4 }}
-                            id="mucho"
-                        />
-                        <label htmlFor="mucho" className={classes.label}>Muchas veces</label>
-                    </div>
-                    <div className={classes.radio}>
-                        <Radio
-                            checked={selectedValue === 3}
-                            onChange={handleChange}
-                            value={3}
-                            name="radio-button-demo"
-                            inputProps={{ 'aria-label': 3 }}
-                            id="algunas"
-                        />
-                        <label htmlFor="algunas" className={classes.label}>Algunas veces</label>
+                        <label htmlFor="Nunca" className={classes.label}>Nunca</label>
                     </div>
                     <div className={classes.radio}>
                         <Radio
@@ -149,20 +129,46 @@ function Question({ question, saveAnswer, setErrorMessage, number }) {
                             value={2}
                             name="radio-button-demo"
                             inputProps={{ 'aria-label': 2 }}
+                            onKeyDown={e => {if(e.key === "Enter") handleSubmit()}}
                             id="pocas"
                         />
                         <label htmlFor="pocas" className={classes.label}>Pocas veces</label>
                     </div>
                     <div className={classes.radio}>
                         <Radio
-                            checked={selectedValue === 1}
+                            checked={selectedValue === 3}
                             onChange={handleChange}
-                            value={1}
+                            value={3}
                             name="radio-button-demo"
-                            inputProps={{ 'aria-label': 1 }}
-                            id="nunca"
+                            inputProps={{ 'aria-label': 3 }}
+                            onKeyDown={e => {if(e.key === "Enter") handleSubmit()}}
+                            id="algunas"
                         />
-                        <label htmlFor="nunca" className={classes.label}>Nunca</label>
+                        <label htmlFor="algunas" className={classes.label}>Algunas veces</label>
+                    </div>
+                    <div className={classes.radio}>
+                        <Radio
+                            checked={selectedValue === 4}
+                            onChange={handleChange}
+                            value={4}
+                            name="radio-button-demo"
+                            inputProps={{ 'aria-label': 4 }}
+                            id="muchas"
+                            onKeyDown={e => {if(e.key === "Enter") handleSubmit()}}
+                        />
+                        <label htmlFor="muchas" className={classes.label}>Muchas veces</label>
+                    </div>
+                    <div className={classes.radio}>
+                        <Radio
+                            checked={selectedValue === 5}
+                            onChange={handleChange}
+                            value={5}
+                            name="radio-button-demo"
+                            inputProps={{ 'aria-label': 5 }}
+                            id="siempre"
+                            onKeyDown={e => {if(e.key === "Enter") handleSubmit()}}
+                        />
+                        <label htmlFor="siempre" className={classes.label}>Siempre</label>
                     </div>
                 </div>
                 <div className={classes.buttonContainer}>

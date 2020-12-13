@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import Footer2 from '../components/Footer2';
 import { useHistory } from 'react-router-dom';
 import pathnames from '../utils/pathnames';
-import questions from '../data/questions';
+import { questions } from '../data/questions';
 import QuestionEmbu from '../components/QuestionEmbu';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { makeStyles } from '@material-ui/core/styles';
@@ -32,6 +32,12 @@ function FormEmbu() {
     const [errorMessage, setErrorMessage] = useState('');
     let history = useHistory();
     const classes = useStyles();
+
+    useEffect(() => {
+        if (!localStorage.getItem('alias')) {
+            history.push(pathnames.userformembu);
+        }
+    }, [])
 
     useEffect(() => {
         if (answers[questions.length - 1]) {
@@ -69,9 +75,9 @@ function FormEmbu() {
                 number={currentQuestion + 1}
             />
             <div className={classes.progressContainer}>
-                <LinearProgress 
-                    variant="determinate" 
-                    value={(currentQuestion + 1) * 100 / 81} 
+                <LinearProgress
+                    variant="determinate"
+                    value={(currentQuestion + 1) * 100 / 81}
                     className={classes.progress}
                 />
             </div>

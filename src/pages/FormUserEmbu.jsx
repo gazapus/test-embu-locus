@@ -6,8 +6,7 @@ import AppBar from '../components/AppBar';
 import Footer from '../components/Footer';
 import pathnames from '../utils/pathnames';
 import { useHistory } from 'react-router-dom';
-import { useContext } from 'react';
-import { ThemeContext } from '../components/Context';
+import AnswerService from '../services/answer.service';
 
 const useStyle = makeStyles((theme) => ({
     rootContainer: {
@@ -69,18 +68,24 @@ const useStyle = makeStyles((theme) => ({
 
 function UserForm() {
     const aliasRef = useRef(null);
-    const [sended, setSended] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const classes = useStyle();
     let history = useHistory();
-    const { setUserData } = useContext(ThemeContext);
 
-    function saveData() {
-        setSended(true)
-        if (aliasRef.current.value.length > 0) {
-            localStorage.setItem('alias', aliasRef.current.value);
-            setUserData({'alias': aliasRef.current.value});
-            history.push(pathnames.formembu);
+    function saveData(e) {
+        e.preventDefault();
+        if (aliasRef.current.value.length === 0) {
+            setErrorMessage("Debe ingresar su alias");
+            return;
         }
+        AnswerService.check(aliasRef.current.value)
+            .then(res => {
+                localStorage.setItem('alias', aliasRef.current.value);
+                history.push(pathnames.formembu)
+            })
+            .catch(err => {
+                setErrorMessage("Alias no registrado")
+            })
     }
 
     return (
@@ -96,8 +101,8 @@ function UserForm() {
                         variant="outlined"
                         inputRef={aliasRef}
                         className={classes.input}
-                        helperText={sended && aliasRef.current.value === "" ? 'Debe completar este campo' : ''}
-                        error={sended && aliasRef.current.value === ""}
+                        helperText={errorMessage}
+                        error={errorMessage.length > 0}
                         name="alias"
                         InputProps={{ inputProps: { maxLength: 30 } }}
                     />
@@ -107,6 +112,7 @@ function UserForm() {
                         size="large"
                         className={classes.button}
                         onClick={saveData}
+                        type="submit"
                     >
                         ACEPTAR
                     </Button>

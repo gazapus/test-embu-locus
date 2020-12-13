@@ -11,7 +11,8 @@ const useStyle = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        paddingTop: '8vh'
+        paddingTop: '8vh',
+        paddingBottom: '2em'
     },
     title: {
         textAlign: 'center',
@@ -21,11 +22,12 @@ const useStyle = makeStyles({
     locus: {
         textAlign: 'center',
         marginTop: 0,
-        maxWidth: '95%'
+        maxWidth: '95%',
+        marginBottom: '1em'
     },
     button: {
-        marginTop: '5em',
-        marginBottom: '4em',
+        marginTop: '1em',
+        marginBottom: '1em',
         padding: '1.3em 3em 1.3em 3em',
     }
 })
@@ -51,7 +53,10 @@ function Home() {
                     (Locus de Control)
                 </Typography>
                 <Link to={pathnames.userform} style={{textDecoration: 'none'}}>
-                    <Button variant="contained" color="secondary" size="large" className={classes.button}>EMPEZAR</Button>
+                    <Button variant="contained" color="secondary" size="large" className={classes.button}>TEST LOCUS</Button>
+                </Link>
+                <Link to={pathnames.userformembu} style={{textDecoration: 'none'}}>
+                    <Button variant="contained" color="secondary" size="large" className={classes.button}>TEST EMBU 89</Button>
                 </Link>
             </div>
             <Footer />
