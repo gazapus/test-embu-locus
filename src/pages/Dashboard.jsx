@@ -14,6 +14,8 @@ import Table from '../components/Table';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Modal from '../components/Modal';
+import ModalEmbu from '../components/ModalEmbu';
+import AnswerEmbuService from '../services/answerEmbu.service';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,7 +59,9 @@ function Dashboard() {
     const [isLogged, setIsLoggeed] = useState(false);
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
+    const [answersEmbu, setAnswersEmbu] = useState([]);
     const [modalAnswer, setModalAnswer] = useState(null);
+    const [modalEmbu, setModalEmbu] = useState(null);
     const history = useHistory();
     const classes = useStyles();
 
@@ -92,6 +96,16 @@ function Dashboard() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    useEffect(() => {
+        AnswerEmbuService.getAll()
+            .then(res => {
+                setEmbu(res.data);
+            })
+            .catch(err => {
+                alert("Error al traer los datos: answers embu")
+            })
+    }, [answers])
+
     function deleteAnswer(id) {
         confirmAlert({
             title: '¿Eliminar Registro?',
@@ -113,6 +127,16 @@ function Dashboard() {
                 }
             ]
         });
+    }
+
+    function setEmbu(answersEmbu) {
+        let newAnswers = [...answers];
+        for (let i = 0; i < newAnswers.length; i++) {
+            let answerEmbu = answersEmbu.find((e) => e.alias === newAnswers[i].alias);
+            newAnswers[i].embu = answerEmbu
+        }
+        setAnswersEmbu(newAnswers);
+        setLoading(false)
     }
 
     function logout() {
@@ -142,7 +166,7 @@ function Dashboard() {
             calculateLocus(answers[i]);
         }
         setAnswers(answers);
-        setLoading(false);
+        //setLoading(false);
     }
 
     if (loading) return <CircularProgress color="primary"></CircularProgress>
@@ -167,18 +191,26 @@ function Dashboard() {
                         <span className={classes.detail}>Locus Interno: {answers.filter(e => e.locus === "Interno").length}</span>
                     </div>
                     <Table
-                        answers={answers}
+                        answers={answersEmbu}
                         onDelete={deleteAnswer}
-                        onDetails={(answer) => setModalAnswer(answer)} />
+                        onDetails={(answer) => setModalAnswer(answer)}
+                        onEmbu={(embu => setModalEmbu(embu))}
+                    />
                 </div>
             </div>
-            <Footer />
             {modalAnswer ?
                 <Modal
                     open={modalAnswer !== null}
                     answer={modalAnswer}
                     questions={questions}
                     handleClose={() => setModalAnswer(null)}
+                /> : ''
+            }
+            {modalEmbu ?
+                <ModalEmbu
+                    open={modalEmbu !== null}
+                    answer={modalEmbu}
+                    handleClose={() => setModalEmbu(null)}
                 /> : ''
             }
         </div>

@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import LaunchIcon from '@material-ui/icons/Launch';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles({
     table: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function BasicTable({answers, onDelete, onDetails}) {
+export default function BasicTable({answers, onDelete, onDetails, onEmbu}) {
     const classes = useStyles();
 
     return (
@@ -31,6 +32,7 @@ export default function BasicTable({answers, onDelete, onDetails}) {
                     <TableRow>
                         <TableCell>Alias</TableCell>
                         <TableCell align="right">Locus</TableCell>
+                        <TableCell align="right">Embu</TableCell>
                         <TableCell align="right">Grado</TableCell>
                         <TableCell align="right">Sexo</TableCell>
                         <TableCell align="right">Edad</TableCell>
@@ -45,6 +47,9 @@ export default function BasicTable({answers, onDelete, onDetails}) {
                                 {row.alias}
                             </TableCell>
                             <TableCell align="right">{row.locus}</TableCell>
+                            <TableCell align="right">
+                                {row.embu ? <Button size="small" variant="outlined" onClick={() => onEmbu(row.embu)}>VER</Button>: ''}
+                            </TableCell>
                             <TableCell align="right">{row.paralelo}</TableCell>
                             <TableCell align="right">{row.sex}</TableCell>
                             <TableCell align="right">{row.age}</TableCell>
