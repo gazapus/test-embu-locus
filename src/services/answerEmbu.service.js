@@ -9,6 +9,10 @@ function get(id) {
     return http.get(`/answerEmbu/get/${id}`, { headers: authHeader() });
 };
 
+function check(alias) {
+    return http.get(`/answerEmbu/check/${alias}`);
+};
+
 function create(data) {
     return http.post("/answerEmbu/create", data);
 };
@@ -24,6 +28,7 @@ function removeAll() {
 let methods = {
     getAll,
     get,
+    check,
     create,
     remove,
     removeAll,

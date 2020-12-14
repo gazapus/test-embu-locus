@@ -7,6 +7,8 @@ import Footer from '../components/Footer';
 import pathnames from '../utils/pathnames';
 import { useHistory } from 'react-router-dom';
 import AnswerService from '../services/answer.service';
+import AnserEmbuService from '../services/answerEmbu.service';
+
 
 const useStyle = makeStyles((theme) => ({
     rootContainer: {
@@ -80,12 +82,14 @@ function UserForm() {
         }
         AnswerService.check(aliasRef.current.value)
             .then(res => {
-                localStorage.setItem('alias', aliasRef.current.value);
-                history.push(pathnames.formembu)
+                AnserEmbuService.check(aliasRef.current.value)
+                    .then(res => setErrorMessage("Este alias ya registró este test") )      
+                    .catch(err =>  {
+                        localStorage.setItem('alias', aliasRef.current.value);
+                        history.push(pathnames.formembu)
+                    })         
             })
-            .catch(err => {
-                setErrorMessage("Alias no registrado")
-            })
+            .catch(err => setErrorMessage("Alias no registrado"))
     }
 
     return (
