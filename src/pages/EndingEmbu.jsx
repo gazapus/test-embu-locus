@@ -106,8 +106,13 @@ function Ending({ location }) {
                         setSaved(false);
                     }
                 })
-                .catch(err => setSaved(false))
-                .finally(() => setSaving(false))
+                .catch(err => {
+                    setSaved(false)
+                })
+                .finally(() =>{
+                    setSaving(false)
+                    localStorage.removeItem("answers");
+                })
         } else {
             setSaving(false);
         }

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -75,6 +75,15 @@ function UserForm() {
     const classes = useStyle();
     let history = useHistory();
 
+    useEffect(() => {
+        let aliasExistent = localStorage.getItem("alias");
+        if(aliasExistent) {
+            console.log(aliasExistent);
+            aliasRef.current.value = aliasExistent;
+        }
+    }, []);
+
+
     function saveData(e) {
         e.preventDefault();
         if (aliasRef.current.value.length === 0) {
@@ -90,6 +99,9 @@ function UserForm() {
                         setLoading(false);
                     })      
                     .catch(err =>  {
+                        if(aliasRef.current.value !== localStorage.getItem("alias")) {
+                            localStorage.removeItem("answers");
+                        }
                         localStorage.setItem('alias', aliasRef.current.value);
                         history.push(pathnames.instrucctionEmbu)
                     })         

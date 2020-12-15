@@ -36,6 +36,13 @@ function FormEmbu() {
     useEffect(() => {
         if (!localStorage.getItem('alias')) {
             history.push(pathnames.userformembu);
+        } else {
+            let previusAnswers = localStorage.getItem("answers");
+            if(previusAnswers) {
+                let restauredAnswers = JSON.parse(previusAnswers);
+                setAnswers(restauredAnswers);
+                setCurrentQuestion(restauredAnswers.length);
+            }
         }
     }, [])
 
@@ -55,6 +62,7 @@ function FormEmbu() {
         let newAnswers = [...answers];
         newAnswers.push(newAnswer);
         setAnswers(newAnswers);
+        localStorage.setItem("answers", JSON.stringify(newAnswers));
         nextQuestion();
     }
 
