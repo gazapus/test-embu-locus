@@ -76,7 +76,7 @@ export default function SimpleModal({ open, answer, handleClose }) {
                     <h2 id="simple-modal-title" style={{ textAlign: 'center' }}>Detalles EMBU</h2>
                     <h4 id="simple-modal-title" style={{ textAlign: 'center' }}>{answer.alias}</h4>
 
-                    <TableContainer component={Paper}>
+                    <TableContainer component={Paper} >
                         <Table className={classes.table} size="small" aria-label="a dense table">
                             <TableHead>
                                 <TableRow>
@@ -87,7 +87,7 @@ export default function SimpleModal({ open, answer, handleClose }) {
                             </TableHead>
                             <TableBody>
                                 {answer.results.map((row) => (
-                                    <TableRow key={row.name}>
+                                    <TableRow key={row.name} hover={true}>
                                         <TableCell component="th" scope="row">
                                             {row.dimension}
                                         </TableCell>

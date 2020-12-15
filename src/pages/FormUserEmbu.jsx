@@ -8,7 +8,7 @@ import pathnames from '../utils/pathnames';
 import { useHistory } from 'react-router-dom';
 import AnswerService from '../services/answer.service';
 import AnserEmbuService from '../services/answerEmbu.service';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyle = makeStyles((theme) => ({
     rootContainer: {
@@ -71,6 +71,7 @@ const useStyle = makeStyles((theme) => ({
 function UserForm() {
     const aliasRef = useRef(null);
     const [errorMessage, setErrorMessage] = useState("");
+    const [loading, setLoading] = useState(false);
     const classes = useStyle();
     let history = useHistory();
 
@@ -80,16 +81,23 @@ function UserForm() {
             setErrorMessage("Debe ingresar su alias");
             return;
         }
+        setLoading(true);
         AnswerService.check(aliasRef.current.value)
             .then(res => {
                 AnserEmbuService.check(aliasRef.current.value)
-                    .then(res => setErrorMessage("Este alias ya registró este test") )      
+                    .then(res => {
+                        setErrorMessage("Este alias ya registró este test");
+                        setLoading(false);
+                    })      
                     .catch(err =>  {
                         localStorage.setItem('alias', aliasRef.current.value);
-                        history.push(pathnames.formembu)
+                        history.push(pathnames.instrucctionEmbu)
                     })         
             })
-            .catch(err => setErrorMessage("Alias no registrado"))
+            .catch(err => {
+                setErrorMessage("Alias no registrado")
+                setLoading(false);
+            })
     }
 
     return (
@@ -121,6 +129,7 @@ function UserForm() {
                         ACEPTAR
                     </Button>
                 </form>
+            {(loading) ? <CircularProgress color="primary"/> : ''}
             </div>
             <Footer />
         </div>

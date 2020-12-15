@@ -6,8 +6,8 @@ module.exports = {
     end: '/end',
     login: '/login',
     dashboard: '/dashboard',
-    formembu: '/formembu',
-    userformembu: '/userformembu',
-    end2: '/end2',
-
+    formembu: '/embu89/test',
+    userformembu: '/embu89/form',
+    end2: '/embu89/end',
+    instrucctionEmbu: '/embu89',
 }

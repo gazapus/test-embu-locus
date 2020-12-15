@@ -11,6 +11,7 @@ import FormEmbu from './pages/FormEmbu';
 import FormUserEmbu from './pages/FormUserEmbu';
 import EndingEmbu from './pages/EndingEmbu';
 import NotFound from './pages/NotFound';
+import InstrucctionsEmbu from './pages/InstrucctionEmbu';
 import pathNames from './utils/pathnames';
 
 function Routes() {
@@ -26,7 +27,7 @@ function Routes() {
             <Route exact path={pathNames.formembu} component={FormEmbu} />
             <Route exact path={pathNames.userformembu} component={FormUserEmbu} />
             <Route exact path={pathNames.end2} component={EndingEmbu} />
-
+            <Route exact path={pathNames.instrucctionEmbu} component={InstrucctionsEmbu} />
             <Route component={NotFound} />
         </Switch>
     );

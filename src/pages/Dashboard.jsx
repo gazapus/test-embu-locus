@@ -1,5 +1,4 @@
 import AppBar from '../components/AppBar';
-import Footer from '../components/Footer';
 import Typography from '@material-ui/core/Typography';
 import { IconButton, makeStyles } from '@material-ui/core'
 import AuthService from '../services/auth.service';
