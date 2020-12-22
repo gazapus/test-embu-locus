@@ -83,6 +83,7 @@ export default function SimpleModal({ open, answer, handleClose }) {
                                     <TableCell>Dimensión</TableCell>
                                     <TableCell align="right">Puntaje</TableCell>
                                     <TableCell align="right">Escala</TableCell>
+                                    <TableCell align="right">Porcentaje</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -93,6 +94,7 @@ export default function SimpleModal({ open, answer, handleClose }) {
                                         </TableCell>
                                         <TableCell align="right">{row.score}</TableCell>
                                         <TableCell align="right">{row.scale}</TableCell>
+                                        <TableCell align="right">{row.percentage.toFixed(2) + '%'}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
